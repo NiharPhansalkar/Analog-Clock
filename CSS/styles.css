@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #282828;
+}
+
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modelling the clock shape */
+#face {
+  width: 25rem;
+  height: 25rem;
+  position: relative;
+  border: 7px solid #282828;
+
+  /* x-offset | y-offset | blur radius | color */
+  /* Comma separation allows us to add multiple box shadows which is otherwise
+        not possible by repeatedly writing box-shadow property */
+
+  box-shadow: -4px -4px 10px rgba(67, 67, 67, 0.85),
+    inset -4px -4px 10px rgba(67, 67, 67, 0.9),
+    inset -4px -4px 10px rgba(67, 67, 67, 0.9), 
+    4px 4px 10px rgba(0, 0, 0, 0.85);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Putting two lines for 12-6 and 3-9 */
+.outerFace {
+  position: relative;
+  background: #282828;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.outerFace::after {
+  transform: rotate(90deg);
+}
+.outerFace::before,
+.outerFace::after,
+.marking {
+  content: "";
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 100%;
+  height: 5px;
+  background-color: #1389ff;
+  z-index: 2;
+}
+
+/* Creating lines for other digits */
+.marking {
+  background-color: grey;
+}
+.marking.markOne {
+  transform: rotate(120deg);
+}
+.marking.markTwo {
+  transform: rotate(150deg);
+}
+.marking.markThree {
+  transform: rotate(30deg);
+}
+.marking.markFour {
+  transform: rotate(60deg);
+}
+
+/* Creating markings */
+.innerFace {
+  position: absolute;
+  background: #282828;
+  width: 85%;
+  height: 85%;
+  border-radius: 50%;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Creating central circle */
+.innerFace::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 15px;
+  height: 15px;
+  margin-left: -9px;
+  margin-top: -4px;
+  border-radius: 18px;
+  background: #4d4b63;
+  z-index: 7;
+}
+
+/* Creating hands */
+.hand {
+  position: absolute;
+  width: 50%;
+  height: 6px;
+  right: 50%;
+  border-radius: 5px;
+  transform-origin: 100%;
+  transform: rotate(90deg);
+  background: #61afff;
+}
+.hand.handHour {
+  width: 30%;
+  z-index: 6;
+  height: 5px;
+  top: 50%;
+}
+.hand.handMin {
+  width: 40%;
+  z-index: 5;
+  height: 3px;
+  top: 50%;
+}
+.hand.handSec {
+  width: 45%;
+  background: rgb(253, 84, 84);
+  height: 2px;
+  top: 50%;
+  z-index: 4;
+}

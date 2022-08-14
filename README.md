@@ -1,0 +1,1 @@
+This is a small HTML, CSS and JS project. I made an analog clock using these technologies.
